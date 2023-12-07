@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>banco</title>
+    <link rel="stylesheet" href="vez.css">
+</head>
+<body>
+    <div id="cadastro">
+        <p>Cadastrar Uma Conta</p>
+        <label for="usuario">CPF:</label><input type="text" id="usuario1">
+        <label for="senha">Senha:</label><input type="text" id="senha1">
+        <button type="submit" onclick="finalizar1()">Finalizar</button>
+    </div>
+    <div id="login">
+        <p>Fazer login</p>
+        <label for="usuario">CPF:</label><input type="text" id="usuario2">
+        <label for="senha">Senha:</label><input type="text" id="senha2">
+        <button type="submit" onclick="finalizar2()">Finalizar</button>
+    </div>
+    <p id="ainda">Ainda não tem cadastro? <span id="mudarcss" onclick="alterar()">Clique Aqui</span></p>
+    <div id="info"></div>
+    <script>
+        let contas = [];
+
+        function finalizar1(){
+            nome = document.getElementById("usuario1").value
+            senha = document.getElementById("senha1").value
+            contas.push({nome, senha})
+            mostrar();
+        }
+
+        // primeira forma
+        //function mostrar(){
+        //    let info1 = document.getElementById("info")
+        //    let tudo = contas.find(function(conta){
+        //        return conta.nome == nome && conta.senha == senha;
+        //    })
+        //    info1.innerHTML = "conta: "+ tudo.nome +"<br>senha: "+tudo.senha;
+        //}
+        function mostrar(){
+            info1 = document.getElementById("info")
+            contas.forEach(function(conta){
+                info1.innerHTML = "conta: "+conta.nome+"<br>senha: "+conta.senha;
+            })
+        }
+    </script>
+</body>
+</html>

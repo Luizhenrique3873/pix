@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login e Cadastro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      padding: 50px;
+    }
+
+    form {
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .message {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Login e Cadastro</h2>
+
+  <div id="loginForm">
+    <h3>Login</h3>
+    <form onsubmit="login(event)">
+      <input type="text" id="loginCpf" placeholder="CPF" required>
+      <input type="password" id="loginPassword" placeholder="Senha" required>
+      <button type="submit">Entrar</button>
+    </form>
+  </div>
+
+  <div id="cadastroForm" style="display:none;">
+    <h3>Cadastro</h3>
+    <form onsubmit="cadastrar(event)">
+      <input type="text" id="cadastroCpf" placeholder="CPF" required>
+      <input type="password" id="cadastroPassword" placeholder="Senha" required>
+      <button type="submit">Cadastrar</button>
+    </form>
+  </div>
+
+  <p class="message">Ainda não tem uma conta? <a href="#" onclick="toggleForms()">Cadastre-se aqui</a></p>
+
+  <script>
+    // Array para armazenar as contas
+    const contas = [];
+
+    // Função para realizar o login
+    function login(event) {
+      event.preventDefault();
+      const cpf = document.getElementById('loginCpf').value;
+      const senha = document.getElementById('loginPassword').value;
+
+      // Verifica se a conta existe no array
+      const conta = contas.find(account => account.cpf === cpf && account.senha === senha);
+
+      if (conta) {
+        alert('Login bem-sucedido!');
+      } else {
+        alert('CPF ou senha incorretos. Tente novamente.');
+      }
+    }
+
+    // Função para cadastrar uma nova conta
+    function cadastrar(event) {
+      event.preventDefault();
+      const cpf = document.getElementById('cadastroCpf').value;
+      const senha = document.getElementById('cadastroPassword').value;
+
+      // Verifica se o CPF já está cadastrado
+      const contaExistente = contas.find(account => account.cpf === cpf);
+
+      if (contaExistente) {
+        alert('CPF já cadastrado. Tente outro.');
+      } else {
+        // Adiciona a nova conta ao array
+        contas.push({ cpf, senha });
+        alert('Cadastro bem-sucedido!');
+        toggleForms(); // Mostra o formulário de login após o cadastro
+      }
+    }
+
+    // Função para alternar entre os formulários de login e cadastro
+    function toggleForms() {
+      const loginForm = document.getElementById('loginForm');
+      const cadastroForm = document.getElementById('cadastroForm');
+
+      if (loginForm.style.display === 'none') {
+        loginForm.style.display = 'block';
+        cadastroForm.style.display = 'none';
+      } else {
+        loginForm.style.display = 'none';
+        cadastroForm.style.display = 'block';
+      }
+    }
+  </script>
+
+</body>
+</html>
