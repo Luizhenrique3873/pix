@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transferência de Dinheiro</title>
+</head>
+<body>
+  <div>
+    <h2>Conta 1</h2>
+    <p id="conta1Saldo">Saldo: $100</p>
+    <label for="valorTransferencia">Digite o valor a ser transferido:</label>
+    <input type="number" id="valorTransferencia" placeholder="Digite o valor">
+    <button onclick="transferir()">Transferir</button>
+  </div>
+  <hr>
+  <div>
+    <h2>Conta 2</h2>
+    <p id="conta2Saldo">Saldo: $50</p>
+  </div>
+
+  <script>
+    // Saldo inicial
+    let saldoConta1 = 100;
+    let saldoConta2 = 50;
+
+    // Função para transferir dinheiro da Conta 1 para a Conta 2
+    function transferir() {
+      const valorTransferencia = parseFloat(document.getElementById('valorTransferencia').value);
+
+      // Verificar se o valor é válido
+      if (isNaN(valorTransferencia) || valorTransferencia <= 0) {
+        alert('Digite um valor válido para a transferência.');
+        return;
+      }
+
+      // Verificar se há saldo suficiente na Conta 1
+      if (saldoConta1 >= valorTransferencia) {
+        // Atualizar saldos
+        saldoConta1 -= valorTransferencia;
+        saldoConta2 += valorTransferencia;
+
+        // Atualizar exibição na tela
+        document.getElementById('conta1Saldo').innerText = `Saldo: $${saldoConta1}`;
+        document.getElementById('conta2Saldo').innerText = `Saldo: $${saldoConta2}`;
+      } else {
+        alert('Saldo insuficiente na Conta 1 para realizar a transferência.');
+      }
+    }
+  </script>
+</body>
+</html>
